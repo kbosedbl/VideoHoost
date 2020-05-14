@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const checkAuth = require('./middlewares/check-auth');
 
 mongoose.connect('mongodb://127.0.0.1/videoServer' , {
 	useCreateIndex: true,
@@ -19,5 +20,6 @@ app.use(bodyParser.json());
 
 app.use('/api/signUp', require('./router/signUp'));
 app.use('/api/signIn', require('./router/signIn'));
-
+app.use('/api/upload', checkAuth ,require('./router/Upload'));
+app.use('/api/videos', express.static('media/uploads'));
 module.exports = app;

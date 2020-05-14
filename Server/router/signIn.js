@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/Users');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 router.post('/' , (req , res , next) => {
 	User.find({ email: req.body.email })
@@ -24,8 +25,20 @@ router.post('/' , (req , res , next) => {
 					}
 					else if(result){
 						//token authentication
+						console.log(user[0]);
+						const token = jwt.sign({
+							userId: user[0]._id,
+							firstName: user[0].firstName,
+							lastName: user[0].lastName,
+							email: user[0].email							
+						} , 
+						require('../configs/default').secret ,
+						 {
+							expiresIn: '1h'
+						});
 						return res.status(200).json({
-							message: "Authentication successfull"
+							message: 'Auth Successful',
+							token: token
 						});
 					}
 					else

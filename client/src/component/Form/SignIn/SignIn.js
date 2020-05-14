@@ -10,7 +10,8 @@ class SignIn extends React.Component {
 
     this.state = {
       email: '',
-      password: ''      
+      password: '',
+      token: ''      
     }
 
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -25,7 +26,14 @@ class SignIn extends React.Component {
         email: this.state.email,
         password: this.state.password
       }).then(res => {
-        console.log(res);
+    	this.setState({
+    		token: res.data.token
+    	});
+    	const data = {
+    		token: this.state.token,
+    		time: new Date().getTime()
+    	}
+    	localStorage.setItem('userTokenTime' , JSON.stringify(data));
       }).catch(err => {
         console.log(err);
       });
