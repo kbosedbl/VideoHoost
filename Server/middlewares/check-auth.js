@@ -7,6 +7,7 @@
     		//console.log('CHECK SUCCESSFUL: Your token: ' + token);
     		const decoded = jwt.verify(token, 'my_secret_key');
     		req.userData = decoded;
+    		console.log(req);    //To be commented out later
     		next();
  		}catch(error)
  		{
