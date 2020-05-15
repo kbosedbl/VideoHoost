@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios';
 
 import Form from '../form';
@@ -13,7 +13,8 @@ class SignIn extends React.Component {
       firstName: '',
       lastName: '',
       email: '',
-      password: ''      
+      password: '',
+      redirect: localStorage.getItem('userTokenTime') ? true : false
     }
 
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -33,8 +34,8 @@ class SignIn extends React.Component {
         email: this.state.email,
         password: this.state.password
       }).then(res => {
-        res.status(200).json({
-            message: "Registered successfully"
+        this.setState({
+          redirect: true
         });
       }).catch(err => {
         console.log(err);
@@ -69,7 +70,7 @@ class SignIn extends React.Component {
   }
 
   render() {
-    
+    if (this.state.redirect) return <Redirect to='/' />
     return (
       <Form onSubmit={this.onSubmitHandler.bind(this)}>
         <h3 className="text-center text-info">Register</h3>

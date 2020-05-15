@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Progress } from 'reactstrap';                              //to show the progress
 import { ToastContainer, toast } from 'react-toastify';               //To display toast message
 import { Redirect } from 'react-router-dom';
-
+import Navbar from '../Navbar/Navbar.js';
 import 'react-toastify/dist/ReactToastify.css';
 import './upload.css';
 class Upload extends React.Component {
@@ -69,7 +69,8 @@ class Upload extends React.Component {
 
   render() {    
     return (
-      <React.Fragment>        
+      <React.Fragment>  
+        <Navbar />      
         <div className="container mt-5">
           <div className="form-group">
             <ToastContainer />
