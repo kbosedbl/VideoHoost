@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Button from '../Button';
-import '../Dashboard/Dashboard.css';
+import './myUploads.css';
 import Navbar from '../Navbar/Navbar';
 
 class Dashboard extends React.Component {
