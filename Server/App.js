@@ -20,7 +20,9 @@ app.use(bodyParser.json());
 
 app.use('/api/signUp', require('./router/signUp'));
 app.use('/api/signIn', require('./router/signIn'));
+app.use('/api/delete', require('./router/deleteVideo'));
 app.use('/api/upload', checkAuth ,require('./router/Upload'));
 app.use('/api/videoList', checkAuth ,require('./router/videoList'));
+app.use('/api/myUploads', checkAuth ,require('./router/myUploads'));
 app.use('/api/videos', express.static('media/uploads'));
 module.exports = app;
