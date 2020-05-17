@@ -72,7 +72,7 @@ class Dashboard extends React.Component {
               {video.uploader_name}
             </Link>
           </span>
-          <span className="video-title">{video.upload_title.replace(/_/g, ' ')}</span>
+          <span className="video-titole">{video.upload_title.replace(/_/g, ' ')}</span>
           <Button upload_title={video.upload_title} uploader_name={video.uploader_name} />
         </div>
       );

@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
-
+import SearchBox from '../SearchBox/searchBox';
 import './Dashboard.css';
 import Navbar from '../Navbar/Navbar';
-
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -24,8 +23,13 @@ class Dashboard extends React.Component {
 
     this.state = {
       redirect: shouldRedirect,
-      videoList: []
+      videoList: [],
+      searchField: ''
     }
+  }
+
+  onSearchChange =(event) => {
+    this.setState({searchField: event.target.value});   
   }
 
   componentDidMount() {
@@ -46,7 +50,12 @@ class Dashboard extends React.Component {
   render() {
     if (this.state.redirect) return <Redirect to="/signIn" />
 
-    const videos = this.state.videoList.map(video => {
+    const filteredVideos = this.state.videoList.filter(videoList =>{      
+      return videoList.upload_title.toLowerCase().includes(this.state.searchField.toLowerCase());
+    });
+    console.log(filteredVideos);
+
+    const videos2 = filteredVideos.map(video => {
       return (
         <div className="video col-xs-12 col-sm-12 col-md-3 col-lg-4" key={video._id}>
           <Link to={'/video/' + video.upload_title}>
@@ -64,15 +73,17 @@ class Dashboard extends React.Component {
       );
     });
 
+
+
     return (
       <React.Fragment>  
         <Navbar />      
-        <div className="container mt-5">          
-          <h4>Videos</h4>
-          <hr className="my-4" />
-
+        <div className="container mt-5">
+          <SearchBox searchChange={this.onSearchChange}/>        
+          <br/>
+          <br/>
           <div className="streams row">
-            {videos}
+            {videos2}
           </div>
         </div>
       </React.Fragment>

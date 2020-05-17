@@ -2,8 +2,8 @@
   width: 100%;
 }
 
-.video-title {
-  color: white;
+.video-titole {
+  color: white !important;
   position: absolute;
   font-size: 1.2rem;
   font-weight: 700;
